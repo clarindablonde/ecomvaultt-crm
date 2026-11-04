@@ -1,9 +1,10 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useAuth } from '@/context/AuthContext';
+import { createClient } from '@/lib/supabase/client';
 import { ChangePasswordModal } from '@/components/shared/ChangePasswordModal';
 import {
   LayoutDashboard,
@@ -46,20 +47,75 @@ export function Sidebar({ isOpen, onClose }: SidebarProps) {
   const pathname = usePathname();
   const { profile, signOut } = useAuth();
   const [isPasswordModalOpen, setIsPasswordModalOpen] = useState(false);
+  const [unreadCount, setUnreadCount] = useState<number>(0);
+  const [pendingOrdersCount, setPendingOrdersCount] = useState<number>(0);
+
+  const supabase = createClient();
+
+  const loadLiveBadges = async () => {
+    try {
+      const [convRes, ordRes] = await Promise.all([
+        supabase.from('conversations').select('unread_count'),
+        supabase.from('orders').select('id').eq('status', 'awaiting_dispatch'),
+      ]);
+
+      if (convRes.data) {
+        const totalUnread = convRes.data.reduce((sum, c) => sum + (Number(c.unread_count) || 0), 0);
+        setUnreadCount(totalUnread);
+      }
+      if (ordRes.data) {
+        setPendingOrdersCount(ordRes.data.length);
+      }
+    } catch (err) {
+      console.error('Error fetching live sidebar badge counts:', err);
+    }
+  };
+
+  useEffect(() => {
+    loadLiveBadges();
+
+    // Listen to real-time conversation and order changes
+    const channel = supabase
+      .channel('realtime:sidebar_live_badges')
+      .on('postgres_changes', { event: '*', schema: 'public', table: 'conversations' }, () => {
+        loadLiveBadges();
+      })
+      .on('postgres_changes', { event: '*', schema: 'public', table: 'orders' }, () => {
+        loadLiveBadges();
+      })
+      .subscribe();
+
+    return () => {
+      supabase.removeChannel(channel);
+    };
+  }, []);
 
   const navSections: NavSection[] = [
     {
       label: 'Workspace',
       items: [
         { id: 'dashboard', href: '/dashboard', label: 'Dashboard', icon: <LayoutDashboard size={16} /> },
-        { id: 'inbox', href: '/inbox', label: 'Live Inbox', icon: <MessageSquare size={16} />, pill: '24' },
+        {
+          id: 'inbox',
+          href: '/inbox',
+          label: 'Live Inbox',
+          icon: <MessageSquare size={16} />,
+          pill: unreadCount > 0 ? String(unreadCount) : undefined,
+        },
         { id: 'ai', href: '/ai', label: 'AI Sales Coach', icon: <Sparkles size={16} /> },
       ],
     },
     {
       label: 'Commerce',
       items: [
-        { id: 'orders', href: '/orders', label: 'Orders & Pipeline', icon: <ShoppingBag size={16} />, pill: '8', pillColor: 'red' },
+        {
+          id: 'orders',
+          href: '/orders',
+          label: 'Orders & Pipeline',
+          icon: <ShoppingBag size={16} />,
+          pill: pendingOrdersCount > 0 ? String(pendingOrdersCount) : undefined,
+          pillColor: 'red',
+        },
         { id: 'customers', href: '/customers', label: 'Customer 360', icon: <Users size={16} /> },
         { id: 'products', href: '/products', label: 'Products & SKUs', icon: <Tag size={16} /> },
       ],

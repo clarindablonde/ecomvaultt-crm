@@ -81,6 +81,17 @@ export function InboxView() {
   useEffect(() => {
     if (activeConvId) {
       fetchMessages(activeConvId);
+
+      // Automatically clear unread count for the active conversation in DB and local state
+      supabase
+        .from('conversations')
+        .update({ unread_count: 0 })
+        .eq('id', activeConvId)
+        .then(() => {
+          setConversations((prev) =>
+            prev.map((c) => (c.id === activeConvId ? { ...c, unread_count: 0 } : c))
+          );
+        });
     }
   }, [activeConvId]);
 
