@@ -191,7 +191,7 @@ export default function ProductsPage() {
                       )}
                     </td>
                     <td className="mono">
-                      <b style={{ color: '#FFFFFF' }}>₦{Number(p.selling_price).toLocaleString()}</b>
+                      <b style={{ color: 'var(--t1)' }}>₦{Number(p.selling_price).toLocaleString()}</b>
                     </td>
                     <td className="mono" style={{ color: 'var(--t2)' }}>
                       ₦{Number(p.cost_price || 0).toLocaleString()}

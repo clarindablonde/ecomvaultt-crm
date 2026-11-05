@@ -428,12 +428,12 @@ export function InboxView() {
                   .join('')
                   .toUpperCase()}
               </div>
-              <b style={{ fontSize: '15px', color: '#E9EDEF' }}>{activeCustomer.full_name}</b>
-              <div style={{ fontSize: '12px', color: '#8696A0' }} className="mono">
+              <b style={{ fontSize: '15px', color: 'var(--t1)' }}>{activeCustomer.full_name}</b>
+              <div style={{ fontSize: '12px', color: 'var(--t3)' }} className="mono">
                 {activeCustomer.phone_number}
               </div>
               <div style={{ marginTop: '8px', display: 'flex', justifyContent: 'center', gap: '6px' }}>
-                <span className="wa-tag" style={{ background: 'rgba(244,180,0,.2)', color: '#FCD34D' }}>
+                <span className="wa-tag" style={{ background: 'var(--gold-dim)', color: 'var(--gold)', border: '1px solid #FDE68A' }}>
                   Health: {activeCustomer.health_score || 85}/100
                 </span>
                 {activeCustomer.instagram_handle && (

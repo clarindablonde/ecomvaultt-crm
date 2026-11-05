@@ -139,7 +139,7 @@ export default function CustomersPage() {
             background: 'none',
             border: 'none',
             outline: 'none',
-            color: '#FFFFFF',
+            color: 'var(--t1)',
             fontSize: '13px',
             flex: 1,
           }}
@@ -147,7 +147,7 @@ export default function CustomersPage() {
         {searchQuery && (
           <button
             onClick={() => setSearchQuery('')}
-            style={{ fontSize: '11px', color: 'var(--t3)', background: 'rgba(255,255,255,0.06)', padding: '2px 8px', borderRadius: '4px' }}
+            style={{ fontSize: '11px', color: 'var(--t3)', background: 'var(--bg-subtle)', padding: '2px 8px', borderRadius: '4px' }}
           >
             Clear
           </button>
@@ -241,7 +241,7 @@ export default function CustomersPage() {
                     <b>{c.lifetime_orders || 0}</b>
                   </td>
                   <td className="mono">
-                    <b style={{ color: '#FFFFFF' }}>₦{Number(c.lifetime_spend || 0).toLocaleString()}</b>
+                    <b style={{ color: 'var(--t1)' }}>₦{Number(c.lifetime_spend || 0).toLocaleString()}</b>
                   </td>
                   <td>
                     <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>

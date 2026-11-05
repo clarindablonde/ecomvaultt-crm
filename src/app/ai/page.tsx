@@ -122,7 +122,7 @@ export default function AICoachPage() {
         {/* Left: High-Conversion Script Playbook */}
         <div style={{ display: 'flex', flexDirection: 'column', gap: '14px' }}>
           <div style={{ marginBottom: '6px' }}>
-            <h3 style={{ fontSize: '16px', color: '#FFFFFF', marginBottom: '2px' }}>
+            <h3 style={{ fontSize: '16px', color: 'var(--t1)', marginBottom: '2px' }}>
               Standard WhatsApp Closing Playbook
             </h3>
             <span style={{ fontSize: '12px', color: 'var(--t3)' }}>
@@ -155,7 +155,7 @@ export default function AICoachPage() {
                 </button>
               </div>
 
-              <b style={{ fontSize: '14px', color: '#FFFFFF', display: 'block', marginBottom: '8px' }}>
+              <b style={{ fontSize: '14px', color: 'var(--t1)', display: 'block', marginBottom: '8px' }}>
                 {script.title}
               </b>
 

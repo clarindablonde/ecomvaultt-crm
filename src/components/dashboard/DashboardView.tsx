@@ -539,7 +539,7 @@ export function DashboardView() {
           }}
         >
           <div>
-            <b style={{ fontSize: '14.5px', color: '#FFFFFF' }}>Recent Orders Ledger</b>
+            <b style={{ fontSize: '14.5px', color: 'var(--t1)' }}>Recent Orders Ledger</b>
             <span style={{ fontSize: '12px', color: 'var(--t3)', marginLeft: '10px' }}>
               Real-time synchronization via Supabase WebSockets
             </span>
@@ -595,7 +595,7 @@ export function DashboardView() {
                     </span>
                   </td>
                   <td className="mono">
-                    <b style={{ color: '#FFFFFF' }}>₦{Number(o.total_amount).toLocaleString()}</b>
+                    <b style={{ color: 'var(--t1)' }}>₦{Number(o.total_amount).toLocaleString()}</b>
                   </td>
                   <td>
                     <span

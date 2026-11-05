@@ -56,7 +56,7 @@ export default function LoginPage() {
         width: '100vw',
         display: 'grid',
         placeItems: 'center',
-        background: 'radial-gradient(ellipse 80% 50% at 50% -20%, rgba(37, 99, 235, 0.15), transparent), radial-gradient(ellipse 60% 40% at 50% 120%, rgba(139, 92, 246, 0.12), transparent), #07090D',
+        background: 'linear-gradient(135deg, #F8FAFC 0%, #EFF6FF 50%, #F1F5F9 100%)',
         padding: '24px',
         position: 'relative',
         overflow: 'hidden',
@@ -67,9 +67,9 @@ export default function LoginPage() {
         style={{
           position: 'absolute',
           inset: 0,
-          backgroundImage: 'radial-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px)',
+          backgroundImage: 'radial-gradient(rgba(15, 23, 42, 0.06) 1px, transparent 1px)',
           backgroundSize: '24px 24px',
-          opacity: 0.5,
+          opacity: 0.6,
           pointerEvents: 'none',
         }}
       />
@@ -78,13 +78,11 @@ export default function LoginPage() {
         style={{
           width: '100%',
           maxWidth: '420px',
-          background: 'rgba(19, 24, 33, 0.85)',
-          backdropFilter: 'blur(24px)',
-          WebkitBackdropFilter: 'blur(24px)',
-          border: '1px solid rgba(255, 255, 255, 0.09)',
-          borderRadius: '20px',
+          background: '#FFFFFF',
+          border: '1px solid var(--border)',
+          borderRadius: '16px',
           padding: '36px 32px',
-          boxShadow: '0 24px 60px -12px rgba(0, 0, 0, 0.75), 0 0 0 1px rgba(255, 255, 255, 0.05) inset',
+          boxShadow: '0 20px 25px -5px rgba(0, 0, 0, 0.08), 0 8px 10px -6px rgba(0, 0, 0, 0.04)',
           position: 'relative',
           zIndex: 10,
         }}
@@ -100,7 +98,7 @@ export default function LoginPage() {
               borderRadius: '14px',
               display: 'grid',
               placeItems: 'center',
-              boxShadow: '0 8px 24px rgba(37, 99, 235, 0.35), 0 0 0 1px rgba(255, 255, 255, 0.2) inset',
+              boxShadow: '0 8px 20px rgba(37, 99, 235, 0.25)',
             }}
           >
             <Sparkles size={24} color="#FFFFFF" />
@@ -111,7 +109,7 @@ export default function LoginPage() {
               fontSize: '22px',
               fontWeight: 700,
               letterSpacing: '-0.02em',
-              color: '#F8FAFC',
+              color: 'var(--t1)',
               marginBottom: '6px',
             }}
           >
@@ -244,8 +242,8 @@ export default function LoginPage() {
             marginTop: '24px',
             padding: '12px 14px',
             borderRadius: '12px',
-            background: 'rgba(255, 255, 255, 0.03)',
-            border: '1px solid rgba(255, 255, 255, 0.06)',
+            background: 'var(--bg-subtle)',
+            border: '1px solid var(--border)',
             display: 'flex',
             alignItems: 'flex-start',
             gap: '10px',

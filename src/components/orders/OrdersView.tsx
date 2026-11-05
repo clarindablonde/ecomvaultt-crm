@@ -253,7 +253,7 @@ export function OrdersView() {
             <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '14px', alignItems: 'center' }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
                 <Clock size={15} color="var(--blue)" />
-                <b style={{ fontSize: '13px', textTransform: 'uppercase', letterSpacing: '0.04em', color: '#FFFFFF' }}>
+                <b style={{ fontSize: '13px', textTransform: 'uppercase', letterSpacing: '0.04em', color: 'var(--t1)' }}>
                   Awaiting Dispatch
                 </b>
               </div>
@@ -304,7 +304,7 @@ export function OrdersView() {
             <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '14px', alignItems: 'center' }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
                 <Truck size={15} color="var(--gold)" />
-                <b style={{ fontSize: '13px', textTransform: 'uppercase', letterSpacing: '0.04em', color: '#FFFFFF' }}>
+                <b style={{ fontSize: '13px', textTransform: 'uppercase', letterSpacing: '0.04em', color: 'var(--t1)' }}>
                   Out for Delivery
                 </b>
               </div>
@@ -363,7 +363,7 @@ export function OrdersView() {
             <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '14px', alignItems: 'center' }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
                 <CheckCircle2 size={15} color="var(--green)" />
-                <b style={{ fontSize: '13px', textTransform: 'uppercase', letterSpacing: '0.04em', color: '#FFFFFF' }}>
+                <b style={{ fontSize: '13px', textTransform: 'uppercase', letterSpacing: '0.04em', color: 'var(--t1)' }}>
                   Delivered & Paid
                 </b>
               </div>
@@ -457,7 +457,7 @@ export function OrdersView() {
                       </span>
                     </td>
                     <td className="mono">
-                      <b style={{ color: '#FFFFFF' }}>₦{Number(o.total_amount).toLocaleString()}</b>
+                      <b style={{ color: 'var(--t1)' }}>₦{Number(o.total_amount).toLocaleString()}</b>
                     </td>
                     <td>
                       <span

@@ -137,7 +137,7 @@ export default function WarehousesPage() {
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
                   <div>
                     <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '4px' }}>
-                      <b style={{ fontSize: '15.5px', color: '#FFFFFF' }}>{wh.name}</b>
+                      <b style={{ fontSize: '15.5px', color: 'var(--t1)' }}>{wh.name}</b>
                       <span className="badge b-blue mono" style={{ fontSize: '10px' }}>
                         {wh.code}
                       </span>
@@ -166,7 +166,7 @@ export default function WarehousesPage() {
                 >
                   <div>
                     <span style={{ fontSize: '11px', color: 'var(--t3)', display: 'block' }}>Stock Units</span>
-                    <b className="mono" style={{ fontSize: '16px', color: '#FFFFFF' }}>{totalStock}</b>
+                    <b className="mono" style={{ fontSize: '16px', color: 'var(--t1)' }}>{totalStock}</b>
                   </div>
                   <div>
                     <span style={{ fontSize: '11px', color: 'var(--t3)', display: 'block' }}>Awaiting Pickup</span>
@@ -191,7 +191,7 @@ export default function WarehousesPage() {
       {/* Stock Breakdown Per Hub Table */}
       <div className="tbl-wrap">
         <div style={{ padding: '16px 20px', borderBottom: '1px solid var(--border)' }}>
-          <b style={{ fontSize: '14px', color: '#FFFFFF' }}>Regional Hub Stock Allocation Matrix</b>
+          <b style={{ fontSize: '14px', color: 'var(--t1)' }}>Regional Hub Stock Allocation Matrix</b>
         </div>
         <table>
           <thead>

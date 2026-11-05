@@ -76,9 +76,10 @@ export function Topbar({ onToggleSidebar }: TopbarProps) {
                 <div
                   style={{
                     fontSize: '12px',
-                    padding: '8px',
+                    padding: '10px',
                     borderRadius: '8px',
-                    background: 'rgba(255,255,255,0.03)',
+                    background: 'var(--bg-subtle)',
+                    border: '1px solid var(--border)',
                   }}
                 >
                   <b style={{ color: 'var(--t1)' }}>New Stock Intake Pending</b>
@@ -93,9 +94,10 @@ export function Topbar({ onToggleSidebar }: TopbarProps) {
                 <div
                   style={{
                     fontSize: '12px',
-                    padding: '8px',
+                    padding: '10px',
                     borderRadius: '8px',
-                    background: 'rgba(255,255,255,0.03)',
+                    background: 'var(--bg-subtle)',
+                    border: '1px solid var(--border)',
                   }}
                 >
                   <b style={{ color: 'var(--t1)' }}>High-Value Order Delivered</b>

@@ -134,7 +134,7 @@ export default function SettingsPage() {
           <div style={{ display: 'flex', flexDirection: 'column', gap: '12px', fontSize: '13px' }}>
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '10px 0', borderBottom: '1px solid var(--border)' }}>
               <div>
-                <b style={{ color: '#FFFFFF' }}>Internal Account Provisioning Model</b>
+                <b style={{ color: 'var(--t1)' }}>Internal Account Provisioning Model</b>
                 <p style={{ color: 'var(--t3)', fontSize: '11.5px', margin: '2px 0 0' }}>
                   Public sign-ups disabled. Only Super Admins can register new staff accounts.
                 </p>
@@ -144,7 +144,7 @@ export default function SettingsPage() {
 
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '10px 0' }}>
               <div>
-                <b style={{ color: '#FFFFFF' }}>Supabase Row Level Security (RLS)</b>
+                <b style={{ color: 'var(--t1)' }}>Supabase Row Level Security (RLS)</b>
                 <p style={{ color: 'var(--t3)', fontSize: '11.5px', margin: '2px 0 0' }}>
                   Database tables are protected by PostgreSQL RLS with security definer functions.
                 </p>

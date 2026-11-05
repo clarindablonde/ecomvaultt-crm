@@ -124,7 +124,7 @@ export function InventoryView() {
           borderRadius: '16px',
           padding: '24px 28px',
           marginBottom: '24px',
-          boxShadow: '0 8px 30px rgba(0, 0, 0, 0.4), 0 1px 0 rgba(255, 255, 255, 0.08) inset',
+          boxShadow: 'var(--shadow-sm)',
           display: 'flex',
           justifyContent: 'space-between',
           alignItems: 'center',
@@ -137,7 +137,7 @@ export function InventoryView() {
             <Layers size={14} color="var(--blue)" />
             <span>Total Physical Stock Valuation</span>
           </div>
-          <div style={{ fontSize: '32px', fontWeight: 800, letterSpacing: '-0.03em', color: '#FFFFFF', margin: '6px 0', display: 'flex', alignItems: 'baseline', gap: '10px' }}>
+          <div style={{ fontSize: '32px', fontWeight: 800, letterSpacing: '-0.03em', color: 'var(--t1)', margin: '6px 0', display: 'flex', alignItems: 'baseline', gap: '10px' }}>
             <span>₦{totalValuation > 0 ? totalValuation.toLocaleString() : '48,250,000'}</span>
             <span style={{ fontSize: '13px', fontWeight: 500, color: 'var(--t3)' }}>retail asset value</span>
           </div>
@@ -151,7 +151,7 @@ export function InventoryView() {
         <div style={{ display: 'flex', gap: '16px', flexWrap: 'wrap' }}>
           <div
             style={{
-              background: 'rgba(255, 255, 255, 0.03)',
+              background: 'var(--bg-subtle)',
               border: '1px solid var(--border)',
               borderRadius: '12px',
               padding: '14px 20px',
@@ -168,7 +168,7 @@ export function InventoryView() {
 
           <div
             style={{
-              background: 'rgba(255, 255, 255, 0.03)',
+              background: 'var(--bg-subtle)',
               border: '1px solid var(--border)',
               borderRadius: '12px',
               padding: '14px 20px',
@@ -259,8 +259,8 @@ export function InventoryView() {
               <div>
                 <b style={{ color: 'var(--gold)', fontSize: '13.5px' }}>Stock Intake Awaiting Inspection & Sign-off</b>
                 <p style={{ fontSize: '12.5px', color: 'var(--t2)', marginTop: '3px', lineHeight: 1.45 }}>
-                  {pendingIntake.productName} · <strong style={{ color: '#FFFFFF' }}>+{pendingIntake.quantity} units</strong> arriving at{' '}
-                  <strong style={{ color: '#FFFFFF' }}>{pendingIntake.warehouse}</strong>. {pendingIntake.notes}
+                  {pendingIntake.productName} · <strong style={{ color: 'var(--t1)' }}>+{pendingIntake.quantity} units</strong> arriving at{' '}
+                  <strong style={{ color: 'var(--t1)' }}>{pendingIntake.warehouse}</strong>. {pendingIntake.notes}
                 </p>
               </div>
             </div>
@@ -329,7 +329,7 @@ export function InventoryView() {
                       <span style={{ fontSize: '12.5px', color: 'var(--t2)' }}>{whName}</span>
                     </td>
                     <td className="mono">
-                      <b style={{ color: '#FFFFFF' }}>{item.stock_on_hand}</b>
+                      <b style={{ color: 'var(--t1)' }}>{item.stock_on_hand}</b>
                     </td>
                     <td className="mono" style={{ color: 'var(--gold)' }}>
                       {item.stock_reserved}

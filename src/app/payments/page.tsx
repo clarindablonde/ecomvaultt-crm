@@ -245,7 +245,7 @@ export default function PaymentsPage() {
                     </span>
                   </td>
                   <td className="mono">
-                    <b style={{ color: '#FFFFFF' }}>₦{Number(o.total_amount).toLocaleString()}</b>
+                    <b style={{ color: 'var(--t1)' }}>₦{Number(o.total_amount).toLocaleString()}</b>
                   </td>
                   <td>
                     <span style={{ fontSize: '12.5px', textTransform: 'capitalize', color: 'var(--t2)' }}>

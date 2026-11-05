@@ -138,8 +138,8 @@ export function CreateOrderModal({ isOpen, onClose, onOrderCreated }: CreateOrde
       style={{
         position: 'fixed',
         inset: 0,
-        backgroundColor: 'rgba(5, 7, 10, 0.75)',
-        backdropFilter: 'blur(8px)',
+        backgroundColor: 'rgba(15, 23, 42, 0.45)',
+        backdropFilter: 'blur(6px)',
         zIndex: 100,
         display: 'grid',
         placeItems: 'center',
@@ -153,11 +153,11 @@ export function CreateOrderModal({ isOpen, onClose, onOrderCreated }: CreateOrde
           maxWidth: '560px',
           maxHeight: '90vh',
           overflowY: 'auto',
-          background: 'var(--card2)',
-          border: '1px solid var(--border2)',
+          background: '#FFFFFF',
+          border: '1px solid var(--border)',
           borderRadius: 'var(--r-lg)',
           padding: '28px',
-          boxShadow: 'var(--shadow)',
+          boxShadow: 'var(--shadow-xl)',
         }}
       >
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '18px' }}>
