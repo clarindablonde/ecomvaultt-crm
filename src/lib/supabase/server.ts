@@ -4,10 +4,13 @@ import { cookies } from 'next/headers';
 export async function createClient() {
   const cookieStore = await cookies();
 
-  return createServerClient(
-    process.env.NEXT_PUBLIC_SUPABASE_URL!,
-    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
-    {
+  let url = (process.env.NEXT_PUBLIC_SUPABASE_URL || 'https://fxkidmxnjwzqolenswdk.supabase.co').trim();
+  if (!url.startsWith('http://') && !url.startsWith('https://')) {
+    url = `https://${url}`;
+  }
+  const key = (process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || 'sb_publishable_RDKWGjTMxv9e_pHzrWsCfg_lX4Jk_R9').trim();
+
+  return createServerClient(url, key, {
       cookies: {
         getAll() {
           return cookieStore.getAll();

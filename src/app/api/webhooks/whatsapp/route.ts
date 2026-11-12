@@ -1,11 +1,17 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { createClient } from '@supabase/supabase-js';
 
-// Server-side Supabase admin client using Service/Publishable key
-const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || 'https://fxkidmxnjwzqolenswdk.supabase.co';
-const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || 'sb_publishable_RDKWGjTMxv9e_pHzrWsCfg_lX4Jk_R9';
+export const dynamic = 'force-dynamic';
 
-const supabase = createClient(supabaseUrl, supabaseKey);
+// Helper to lazily instantiate Supabase admin client
+function getSupabaseClient() {
+  let url = (process.env.NEXT_PUBLIC_SUPABASE_URL || 'https://fxkidmxnjwzqolenswdk.supabase.co').trim();
+  if (!url.startsWith('http://') && !url.startsWith('https://')) {
+    url = `https://${url}`;
+  }
+  const key = (process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || 'sb_publishable_RDKWGjTMxv9e_pHzrWsCfg_lX4Jk_R9').trim();
+  return createClient(url, key);
+}
 
 // WhatsApp Verify Token for Meta Webhook setup
 const VERIFY_TOKEN = process.env.WHATSAPP_VERIFY_TOKEN || 'ecomvaultt_cb_secret_token_live';
@@ -59,6 +65,8 @@ export async function POST(req: NextRequest) {
       (messageData.type === 'image' ? '[Customer sent an image]' : '[Customer sent media]');
 
     console.log(`[WhatsApp Inbound] Received message from ${formattedPhone}: "${messageText}"`);
+
+    const supabase = getSupabaseClient();
 
     // 1. Find or create customer by phone number
     let { data: customer } = await supabase
