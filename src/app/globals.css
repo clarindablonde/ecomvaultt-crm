@@ -558,8 +558,11 @@ input:-webkit-autofill:active {
 #app {
   display: flex;
   min-height: 100vh;
-  width: 100vw;
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
   background: var(--bg);
+  position: relative;
 }
 
 /* Sidebar */
@@ -746,7 +749,8 @@ input:-webkit-autofill:active {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
-  width: calc(100vw - 256px);
+  min-width: 0;
+  max-width: calc(100% - 256px);
   background: var(--bg);
 }
 
@@ -987,40 +991,96 @@ tbody tr:hover {
 }
 
 /* ============================================================
-   RESPONSIVE OVERRIDES
+   RESPONSIVE COMPONENT UTILITIES & SHELL ENHANCEMENTS
    ============================================================ */
 
-@media (max-width: 1024px) {
-  .sidebar {
-    transform: translateX(-100%);
-  }
-
-  .sidebar.open {
-    transform: translateX(0);
-  }
-
-  .main {
-    margin-left: 0;
-    width: 100vw;
-  }
-
-  .hamb {
-    display: grid;
-  }
-
-  .gsearch {
-    width: 240px;
-  }
+.sidebar-close-btn {
+  display: none;
+  width: 32px;
+  height: 32px;
+  border-radius: var(--r-btn);
+  border: 1px solid var(--border);
+  background: transparent;
+  place-items: center;
+  color: var(--t2);
+  cursor: pointer;
+  margin-left: auto;
+  transition: all 0.15s ease;
 }
 
-@media (max-width: 640px) {
-  .content {
-    padding: 16px;
-  }
+.sidebar-close-btn:hover {
+  background: var(--bg-subtle);
+  color: var(--t1);
+}
 
-  .gsearch {
-    display: none;
-  }
+.sidebar-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(15, 23, 42, 0.45);
+  backdrop-filter: blur(4px);
+  z-index: 55;
+  animation: fadeIn 0.18s ease;
+}
+
+/* Responsive Form Grids */
+.form-grid-2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+
+.form-grid-2-1 {
+  grid-template-columns: 2fr 1fr;
+}
+
+.form-grid-3-1 {
+  grid-template-columns: 3fr 1fr;
+}
+
+.channel-selector-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 6px;
+}
+
+.modal-card {
+  padding: 28px;
+}
+
+.filter-search-box {
+  width: 260px;
+}
+
+/* Kanban Board Layout */
+.kanban-board {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
+  gap: 16px;
+  align-items: start;
+}
+
+/* Inbox Mobile Controls */
+.wa-back-btn {
+  display: none;
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  place-items: center;
+  border: 1px solid var(--border);
+  background: #FFFFFF;
+  color: var(--t2);
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: all 0.15s ease;
+}
+
+.wa-back-btn:hover {
+  background: var(--bg-subtle);
+  color: var(--t1);
+}
+
+.wa-crm-mobile-head {
+  display: none;
 }
 
 /* ============================================================
@@ -1478,4 +1538,257 @@ tbody tr:hover {
 
 .crm-row span {
   color: var(--t3);
+}
+
+/* ============================================================
+   RESPONSIVE DESIGN SYSTEM OVERRIDES
+   ============================================================ */
+
+/* Medium / Laptops / Large Tablets (<= 1200px) */
+@media (max-width: 1200px) {
+  .g4 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .g23 {
+    grid-template-columns: 1fr;
+  }
+
+  /* Inbox on large tablets */
+  .wa-crm {
+    position: absolute;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    width: 310px;
+    z-index: 20;
+    box-shadow: -8px 0 25px rgba(0, 0, 0, 0.1);
+    transform: translateX(100%);
+    transition: transform 0.25s var(--ease);
+  }
+
+  .wa.wa-mobile-crm .wa-crm {
+    transform: translateX(0);
+    display: flex;
+  }
+}
+
+/* Tablet & Mobile AppShell Breakpoint (<= 1024px) */
+@media (max-width: 1024px) {
+  .sidebar {
+    transform: translateX(-100%);
+  }
+
+  .sidebar.open {
+    transform: translateX(0);
+    box-shadow: 0 0 40px rgba(0, 0, 0, 0.25);
+  }
+
+  .sidebar-close-btn {
+    display: grid;
+  }
+
+  .main {
+    margin-left: 0;
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .hamb {
+    display: grid;
+  }
+
+  .topbar {
+    padding: 0 20px;
+  }
+
+  .gsearch {
+    width: 220px;
+  }
+
+  /* Kanban: Horizontal Touch Scroll */
+  .kanban-board {
+    display: flex;
+    overflow-x: auto;
+    padding-bottom: 16px;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    gap: 14px;
+  }
+
+  .kanban-col {
+    min-width: 285px;
+    max-width: 315px;
+    flex-shrink: 0;
+    scroll-snap-align: start;
+  }
+}
+
+/* Tablets & Mobile Screens (<= 768px) */
+@media (max-width: 768px) {
+  .content {
+    padding: 18px 14px;
+  }
+
+  .phead {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 14px;
+    margin-bottom: 18px;
+  }
+
+  .phead .sp {
+    width: 100%;
+    flex-wrap: wrap;
+  }
+
+  .phead .sp .btn {
+    flex: 1;
+    min-width: 130px;
+    justify-content: center;
+  }
+
+  .modal-card {
+    padding: 20px 16px;
+  }
+
+  .form-grid-2,
+  .form-grid-2-1,
+  .form-grid-3-1 {
+    grid-template-columns: 1fr;
+  }
+
+  .channel-selector-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .filter-search-box {
+    width: 100%;
+  }
+
+  /* Full Native WhatsApp Mobile Experience */
+  .wa {
+    position: relative;
+    border-radius: var(--r-md);
+  }
+
+  .wa-back-btn {
+    display: grid;
+  }
+
+  .wa-crm-mobile-head {
+    display: block;
+  }
+
+  .wa-list {
+    width: 100%;
+  }
+
+  .wa-conv {
+    width: 100%;
+  }
+
+  .wa-crm {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    z-index: 30;
+  }
+
+  /* Switch between list, chat, and crm views */
+  .wa.wa-mobile-list .wa-conv,
+  .wa.wa-mobile-list .wa-crm {
+    display: none !important;
+  }
+
+  .wa.wa-mobile-list .wa-list {
+    display: flex !important;
+  }
+
+  .wa.wa-mobile-chat .wa-list,
+  .wa.wa-mobile-chat .wa-crm {
+    display: none !important;
+  }
+
+  .wa.wa-mobile-chat .wa-conv {
+    display: flex !important;
+  }
+
+  .wa.wa-mobile-crm .wa-list,
+  .wa.wa-mobile-crm .wa-conv {
+    display: none !important;
+  }
+
+  .wa.wa-mobile-crm .wa-crm {
+    display: flex !important;
+    transform: none;
+  }
+}
+
+/* Mobile Phones (<= 640px) */
+@media (max-width: 640px) {
+  .gsearch {
+    display: none;
+  }
+
+  .topbar {
+    padding: 0 14px;
+    height: 56px;
+  }
+
+  .online-chip {
+    padding: 5px 8px;
+    font-size: 11px;
+  }
+
+  .online-chip .txt {
+    display: none;
+  }
+
+  .g4, .g2, .g23 {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  .card.kpi {
+    padding: 16px 14px;
+  }
+
+  .card.kpi .val {
+    font-size: 22px;
+  }
+
+  table th,
+  table td {
+    padding: 10px 12px;
+  }
+
+  .tbl-wrap {
+    border-radius: var(--r-md);
+  }
+}
+
+/* Extra Small Phones (<= 480px) */
+@media (max-width: 480px) {
+  .phead h1 {
+    font-size: 19px;
+  }
+
+  .content {
+    padding: 14px 10px;
+  }
+
+  .btn {
+    padding: 7px 12px;
+    font-size: 12px;
+  }
+
+  .tabs button {
+    padding: 5px 10px;
+    font-size: 11px;
+  }
+
+  .modal-card {
+    padding: 16px 12px;
+  }
 }

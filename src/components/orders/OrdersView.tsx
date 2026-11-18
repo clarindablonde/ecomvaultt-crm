@@ -226,30 +226,23 @@ export function OrdersView() {
           </button>
         </div>
 
-        <div style={{ position: 'relative', width: '260px' }}>
+        <div className="filter-search-box" style={{ position: 'relative' }}>
           <Search size={14} style={{ position: 'absolute', left: '10px', top: '50%', transform: 'translateY(-50%)', color: 'var(--t3)' }} />
           <input
             className="inp"
             placeholder="Search code, customer, phone…"
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            style={{ paddingLeft: '32px', height: '34px', fontSize: '12.5px', borderRadius: '8px' }}
+            style={{ paddingLeft: '32px', height: '34px', fontSize: '12.5px', borderRadius: '8px', width: '100%' }}
           />
         </div>
       </div>
 
       {/* Kanban View */}
       {activeTab === 'kanban' && (
-        <div
-          style={{
-            display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
-            gap: '16px',
-            alignItems: 'start',
-          }}
-        >
+        <div className="kanban-board">
           {/* Column 1: Awaiting Dispatch */}
-          <div style={{ background: 'var(--bg2)', borderRadius: '16px', padding: '16px', border: '1px solid var(--border)' }}>
+          <div className="kanban-col" style={{ background: 'var(--bg2)', borderRadius: '16px', padding: '16px', border: '1px solid var(--border)' }}>
             <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '14px', alignItems: 'center' }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
                 <Clock size={15} color="var(--blue)" />
@@ -300,7 +293,7 @@ export function OrdersView() {
           </div>
 
           {/* Column 2: Out for Delivery */}
-          <div style={{ background: 'var(--bg2)', borderRadius: '16px', padding: '16px', border: '1px solid var(--border)' }}>
+          <div className="kanban-col" style={{ background: 'var(--bg2)', borderRadius: '16px', padding: '16px', border: '1px solid var(--border)' }}>
             <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '14px', alignItems: 'center' }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
                 <Truck size={15} color="var(--gold)" />
@@ -359,7 +352,7 @@ export function OrdersView() {
           </div>
 
           {/* Column 3: Delivered & Paid */}
-          <div style={{ background: 'var(--bg2)', borderRadius: '16px', padding: '16px', border: '1px solid var(--border)' }}>
+          <div className="kanban-col" style={{ background: 'var(--bg2)', borderRadius: '16px', padding: '16px', border: '1px solid var(--border)' }}>
             <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '14px', alignItems: 'center' }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
                 <CheckCircle2 size={15} color="var(--green)" />

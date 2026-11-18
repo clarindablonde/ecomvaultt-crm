@@ -147,7 +147,7 @@ export function CreateOrderModal({ isOpen, onClose, onOrderCreated }: CreateOrde
       }}
     >
       <div
-        className="card"
+        className="card modal-card"
         style={{
           width: '100%',
           maxWidth: '560px',
@@ -156,7 +156,6 @@ export function CreateOrderModal({ isOpen, onClose, onOrderCreated }: CreateOrde
           background: '#FFFFFF',
           border: '1px solid var(--border)',
           borderRadius: 'var(--r-lg)',
-          padding: '28px',
           boxShadow: 'var(--shadow-xl)',
         }}
       >
@@ -227,7 +226,7 @@ export function CreateOrderModal({ isOpen, onClose, onOrderCreated }: CreateOrde
           {/* Acquisition Channel */}
           <div className="field">
             <label>Customer Source Channel</label>
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '6px' }}>
+            <div className="channel-selector-grid">
               {(['whatsapp', 'instagram', 'facebook', 'tiktok'] as const).map((ch) => (
                 <button
                   key={ch}
@@ -251,7 +250,7 @@ export function CreateOrderModal({ isOpen, onClose, onOrderCreated }: CreateOrde
           </div>
 
           {/* Delivery Address & City */}
-          <div style={{ display: 'grid', gridTemplateColumns: '2fr 1fr', gap: '12px' }}>
+          <div className="form-grid-2 form-grid-2-1" style={{ gap: '12px' }}>
             <div className="field">
               <label>Delivery Address</label>
               <input
@@ -279,7 +278,7 @@ export function CreateOrderModal({ isOpen, onClose, onOrderCreated }: CreateOrde
           </div>
 
           {/* Product Selection */}
-          <div style={{ display: 'grid', gridTemplateColumns: '3fr 1fr', gap: '12px' }}>
+          <div className="form-grid-2 form-grid-3-1" style={{ gap: '12px' }}>
             <div className="field">
               <label>Product</label>
               <select
@@ -307,7 +306,7 @@ export function CreateOrderModal({ isOpen, onClose, onOrderCreated }: CreateOrde
           </div>
 
           {/* Payment & Delivery Fee */}
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '12px' }}>
+          <div className="form-grid-2" style={{ gap: '12px' }}>
             <div className="field">
               <label>Payment Terms</label>
               <select

@@ -22,6 +22,7 @@ import {
   Key,
   LogOut,
   Hexagon,
+  X,
 } from 'lucide-react';
 
 interface SidebarProps {
@@ -150,10 +151,19 @@ export function Sidebar({ isOpen, onClose }: SidebarProps) {
         <div className="mark">
           <Hexagon size={18} />
         </div>
-        <div>
+        <div style={{ flex: 1, minWidth: 0 }}>
           <span>EcomVaultt</span>
           <small>Clarinda OS</small>
         </div>
+        {onClose && (
+          <button
+            className="sidebar-close-btn"
+            onClick={onClose}
+            aria-label="Close navigation"
+          >
+            <X size={16} />
+          </button>
+        )}
       </div>
 
       {/* Navigation Sections */}

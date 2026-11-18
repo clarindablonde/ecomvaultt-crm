@@ -50,6 +50,7 @@ export function Topbar({ onToggleSidebar }: TopbarProps) {
                 top: '46px',
                 right: 0,
                 width: '320px',
+                maxWidth: 'calc(100vw - 32px)',
                 background: 'var(--card-elevated)',
                 border: '1px solid var(--border2)',
                 borderRadius: '16px',

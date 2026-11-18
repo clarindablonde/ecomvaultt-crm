@@ -21,6 +21,14 @@ export function AppShell({ children }: { children: React.ReactNode }) {
         onClose={() => setSidebarOpen(false)}
       />
 
+      {sidebarOpen && (
+        <div
+          className="sidebar-backdrop"
+          onClick={() => setSidebarOpen(false)}
+          aria-hidden="true"
+        />
+      )}
+
       <div className="main">
         <Topbar onToggleSidebar={() => setSidebarOpen(!sidebarOpen)} />
         <main className="content">{children}</main>

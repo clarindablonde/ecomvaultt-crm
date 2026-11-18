@@ -4,6 +4,7 @@ import React, { useEffect, useState, useRef } from 'react';
 import { createClient } from '@/lib/supabase/client';
 import { Conversation, Message, Customer } from '@/types/database';
 import { CreateOrderModal } from '@/components/orders/CreateOrderModal';
+import { ArrowLeft, Info, MessageSquare } from 'lucide-react';
 
 export function InboxView() {
   const [conversations, setConversations] = useState<Conversation[]>([]);
@@ -15,6 +16,7 @@ export function InboxView() {
   const [searchQuery, setSearchQuery] = useState('');
   const [isOrderModalOpen, setIsOrderModalOpen] = useState(false);
   const [loadingMsgs, setLoadingMsgs] = useState(false);
+  const [mobileView, setMobileView] = useState<'list' | 'chat' | 'crm'>('list');
 
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const supabase = createClient();
@@ -152,7 +154,7 @@ export function InboxView() {
 
   return (
     <section className="page full on" id="page-inbox" style={{ height: 'calc(100vh - 58px)' }}>
-      <div className="wa" id="waShell">
+      <div className={`wa wa-mobile-${mobileView}`} id="waShell">
         {/* Left Chat List */}
         <div className="wa-list">
           <div className="wa-list-head">
@@ -206,7 +208,10 @@ export function InboxView() {
                 <div
                   key={conv.id}
                   className={`wa-chat ${isSelected ? 'on' : ''}`}
-                  onClick={() => setActiveConvId(conv.id)}
+                  onClick={() => {
+                    setActiveConvId(conv.id);
+                    setMobileView('chat');
+                  }}
                 >
                   <div className="av a3">
                     {cust?.full_name
@@ -277,6 +282,14 @@ export function InboxView() {
           {activeCustomer ? (
             <>
               <div className="wa-conv-head">
+                <button
+                  className="wa-back-btn"
+                  onClick={() => setMobileView('list')}
+                  aria-label="Back to conversations"
+                  title="Back to conversations"
+                >
+                  <ArrowLeft size={16} />
+                </button>
                 <div className="av a3">
                   {activeCustomer.full_name
                     .split(' ')
@@ -289,6 +302,13 @@ export function InboxView() {
                   <span>online · active session</span>
                 </div>
                 <div className="acts">
+                  <button
+                    className={`wa-ic ${mobileView === 'crm' ? 'active' : ''}`}
+                    title="Customer 360 Details"
+                    onClick={() => setMobileView(mobileView === 'crm' ? 'chat' : 'crm')}
+                  >
+                    <Info size={14} />
+                  </button>
                   <a
                     className="wa-ic"
                     href={`https://wa.me/${activeCustomer.phone_number.replace(/\+/g, '')}`}
@@ -420,6 +440,16 @@ export function InboxView() {
         {/* Right Customer 360 Sidebar */}
         {activeCustomer && (
           <div className="wa-crm">
+            <div className="wa-crm-mobile-head">
+              <button
+                className="btn btn-sm btn-ghost"
+                onClick={() => setMobileView('chat')}
+                style={{ gap: '6px', marginBottom: '8px', width: '100%', justifyContent: 'flex-start' }}
+              >
+                <ArrowLeft size={14} />
+                <span>Back to Conversation</span>
+              </button>
+            </div>
             <div style={{ textAlign: 'center', paddingBottom: '6px' }}>
               <div className="av a3 lg" style={{ margin: '0 auto 10px' }}>
                 {activeCustomer.full_name

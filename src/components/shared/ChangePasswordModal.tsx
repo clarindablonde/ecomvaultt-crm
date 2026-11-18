@@ -68,14 +68,13 @@ export function ChangePasswordModal({ isOpen, onClose }: ChangePasswordModalProp
       }}
     >
       <div
-        className="card"
+        className="card modal-card"
         style={{
           width: '100%',
           maxWidth: '440px',
           background: '#FFFFFF',
           border: '1px solid var(--border)',
           borderRadius: 'var(--r-lg)',
-          padding: '28px',
           boxShadow: 'var(--shadow-xl)',
         }}
       >
