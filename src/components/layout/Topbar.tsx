@@ -1,7 +1,8 @@
 'use client';
 
 import React, { useState } from 'react';
-import { Search, Bell, RefreshCw, Menu, CheckCheck, Clock } from 'lucide-react';
+import { Search, Bell, RefreshCw, Menu, CheckCheck, Clock, Moon, Sun } from 'lucide-react';
+import { useTheme } from '@/context/ThemeContext';
 
 interface TopbarProps {
   onToggleSidebar: () => void;
@@ -10,6 +11,7 @@ interface TopbarProps {
 export function Topbar({ onToggleSidebar }: TopbarProps) {
   const [showNotif, setShowNotif] = useState(false);
   const [unreadCount, setUnreadCount] = useState(2);
+  const { theme, toggleTheme } = useTheme();
 
   return (
     <header className="topbar">
@@ -125,6 +127,16 @@ export function Topbar({ onToggleSidebar }: TopbarProps) {
             </div>
           )}
         </div>
+
+        {/* Theme Mode Switcher */}
+        <button
+          className="icon-btn"
+          onClick={toggleTheme}
+          title={theme === 'dark' ? 'Switch to Light Mode' : 'Switch to Dark Mode'}
+          aria-label="Toggle theme mode"
+        >
+          {theme === 'dark' ? <Sun size={15} /> : <Moon size={15} />}
+        </button>
 
         {/* Sync Status Button */}
         <button className="icon-btn" title="Supabase Realtime Sync Active">

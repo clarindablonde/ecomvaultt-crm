@@ -10,10 +10,15 @@ import {
   Globe2,
   Save,
   CheckCircle2,
+  Moon,
+  Sun,
+  Palette,
 } from 'lucide-react';
+import { useTheme } from '@/context/ThemeContext';
 
 export default function SettingsPage() {
   const [savedMsg, setSavedMsg] = useState(false);
+  const { theme, setTheme } = useTheme();
 
   const handleSave = (e: React.FormEvent) => {
     e.preventDefault();
@@ -26,11 +31,11 @@ export default function SettingsPage() {
       <div className="phead">
         <div>
           <div className="crumb">
-            <b>System Management</b> · Configuration
+            <b>SYSTEM</b> · Configuration
           </div>
           <h1>Platform Settings & Integrations</h1>
           <p>
-            Organization profile, omnichannel WhatsApp credentials, multi-hub operational parameters, and security settings.
+            Appearance themes, organization profile, omnichannel WhatsApp credentials, multi-hub operational parameters, and security policies.
           </p>
         </div>
       </div>
@@ -56,6 +61,91 @@ export default function SettingsPage() {
       )}
 
       <form onSubmit={handleSave} style={{ display: 'flex', flexDirection: 'column', gap: '24px' }}>
+        {/* Appearance & Dark Mode Selection */}
+        <div className="card">
+          <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '16px' }}>
+            <Palette size={18} color="var(--purple)" />
+            <div>
+              <h3 style={{ fontSize: '15px', margin: 0 }}>System Appearance & Theme</h3>
+              <p style={{ color: 'var(--t3)', fontSize: '12px', margin: '2px 0 0' }}>
+                Toggle between the original executive dark mode and the modern light mode.
+              </p>
+            </div>
+          </div>
+
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: '16px' }}>
+            <div
+              onClick={() => setTheme('dark')}
+              style={{
+                padding: '16px',
+                borderRadius: '12px',
+                border: `2px solid ${theme === 'dark' ? 'var(--blue)' : 'var(--border)'}`,
+                background: theme === 'dark' ? 'var(--blue-dim)' : 'var(--card)',
+                cursor: 'pointer',
+                display: 'flex',
+                alignItems: 'center',
+                gap: '12px',
+                transition: 'all 0.18s ease',
+              }}
+            >
+              <div
+                style={{
+                  width: '38px',
+                  height: '38px',
+                  borderRadius: '10px',
+                  background: '#07090E',
+                  color: '#60A5FA',
+                  display: 'grid',
+                  placeItems: 'center',
+                  border: '1px solid rgba(255, 255, 255, 0.15)',
+                }}
+              >
+                <Moon size={18} />
+              </div>
+              <div style={{ flex: 1 }}>
+                <b style={{ fontSize: '13px', display: 'block', color: 'var(--t1)' }}>Dark Mode (Original Design)</b>
+                <span style={{ fontSize: '11.5px', color: 'var(--t3)' }}>Deep black OLED surfaces & crisp contrast</span>
+              </div>
+              {theme === 'dark' && <CheckCircle2 size={16} color="var(--blue)" />}
+            </div>
+
+            <div
+              onClick={() => setTheme('light')}
+              style={{
+                padding: '16px',
+                borderRadius: '12px',
+                border: `2px solid ${theme === 'light' ? 'var(--blue)' : 'var(--border)'}`,
+                background: theme === 'light' ? 'var(--blue-dim)' : 'var(--card)',
+                cursor: 'pointer',
+                display: 'flex',
+                alignItems: 'center',
+                gap: '12px',
+                transition: 'all 0.18s ease',
+              }}
+            >
+              <div
+                style={{
+                  width: '38px',
+                  height: '38px',
+                  borderRadius: '10px',
+                  background: '#F8FAFC',
+                  color: '#2563EB',
+                  display: 'grid',
+                  placeItems: 'center',
+                  border: '1px solid #E2E8F0',
+                }}
+              >
+                <Sun size={18} />
+              </div>
+              <div style={{ flex: 1 }}>
+                <b style={{ fontSize: '13px', display: 'block', color: 'var(--t1)' }}>Light Mode (Executive Clean)</b>
+                <span style={{ fontSize: '11.5px', color: 'var(--t3)' }}>Bright corporate enterprise layout</span>
+              </div>
+              {theme === 'light' && <CheckCircle2 size={16} color="var(--blue)" />}
+            </div>
+          </div>
+        </div>
+
         {/* Organization Info */}
         <div className="card">
           <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '16px' }}>

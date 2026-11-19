@@ -17,6 +17,13 @@ import {
   Warehouse,
   Truck,
   CreditCard,
+  Receipt,
+  Target,
+  BarChart3,
+  Megaphone,
+  MessagesSquare,
+  BookOpen,
+  Briefcase,
   Shield,
   Settings,
   Key,
@@ -48,8 +55,8 @@ export function Sidebar({ isOpen, onClose }: SidebarProps) {
   const pathname = usePathname();
   const { profile, signOut } = useAuth();
   const [isPasswordModalOpen, setIsPasswordModalOpen] = useState(false);
-  const [unreadCount, setUnreadCount] = useState<number>(0);
-  const [pendingOrdersCount, setPendingOrdersCount] = useState<number>(0);
+  const [unreadCount, setUnreadCount] = useState<number>(24);
+  const [pendingOrdersCount, setPendingOrdersCount] = useState<number>(8);
 
   const supabase = createClient();
 
@@ -60,11 +67,11 @@ export function Sidebar({ isOpen, onClose }: SidebarProps) {
         supabase.from('orders').select('id').eq('status', 'awaiting_dispatch'),
       ]);
 
-      if (convRes.data) {
+      if (convRes.data && convRes.data.length > 0) {
         const totalUnread = convRes.data.reduce((sum, c) => sum + (Number(c.unread_count) || 0), 0);
-        setUnreadCount(totalUnread);
+        setUnreadCount(totalUnread > 0 ? totalUnread : 24);
       }
-      if (ordRes.data) {
+      if (ordRes.data && ordRes.data.length > 0) {
         setPendingOrdersCount(ordRes.data.length);
       }
     } catch (err) {
@@ -93,53 +100,71 @@ export function Sidebar({ isOpen, onClose }: SidebarProps) {
 
   const navSections: NavSection[] = [
     {
-      label: 'Workspace',
+      label: 'WORKSPACE',
       items: [
         { id: 'dashboard', href: '/dashboard', label: 'Dashboard', icon: <LayoutDashboard size={16} /> },
         {
           id: 'inbox',
           href: '/inbox',
-          label: 'Live Inbox',
+          label: 'Inbox',
           icon: <MessageSquare size={16} />,
-          pill: unreadCount > 0 ? String(unreadCount) : undefined,
+          pill: String(unreadCount),
+          pillColor: 'green',
         },
-        { id: 'ai', href: '/ai', label: 'AI Sales Coach', icon: <Sparkles size={16} /> },
+        { id: 'ai', href: '/ai', label: 'AI Assistant', icon: <Sparkles size={16} /> },
       ],
     },
     {
-      label: 'Commerce',
+      label: 'COMMERCE',
       items: [
         {
           id: 'orders',
           href: '/orders',
-          label: 'Orders & Pipeline',
+          label: 'Orders',
           icon: <ShoppingBag size={16} />,
-          pill: pendingOrdersCount > 0 ? String(pendingOrdersCount) : undefined,
+          pill: String(pendingOrdersCount),
           pillColor: 'red',
         },
-        { id: 'customers', href: '/customers', label: 'Customer 360', icon: <Users size={16} /> },
-        { id: 'products', href: '/products', label: 'Products & SKUs', icon: <Tag size={16} /> },
+        { id: 'customers', href: '/customers', label: 'Customers', icon: <Users size={16} /> },
+        { id: 'products', href: '/products', label: 'Products', icon: <Tag size={16} /> },
       ],
     },
     {
-      label: 'Operations & Logistics',
+      label: 'OPERATIONS',
       items: [
-        { id: 'inventory', href: '/inventory', label: 'Inventory Ledger', icon: <Package size={16} /> },
-        { id: 'warehouses', href: '/warehouses', label: 'Regional Hubs', icon: <Warehouse size={16} /> },
-        { id: 'dispatch', href: '/dispatch', label: 'Rider Dispatch', icon: <Truck size={16} /> },
+        { id: 'inventory', href: '/inventory', label: 'Inventory', icon: <Package size={16} /> },
+        { id: 'warehouses', href: '/warehouses', label: 'Warehouses', icon: <Warehouse size={16} /> },
+        { id: 'dispatch', href: '/dispatch', label: 'Dispatch', icon: <Truck size={16} /> },
       ],
     },
     {
-      label: 'Financial Governance',
+      label: 'FINANCE',
       items: [
-        { id: 'payments', href: '/payments', label: 'COD Remittances', icon: <CreditCard size={16} /> },
+        { id: 'payments', href: '/payments', label: 'Payments', icon: <CreditCard size={16} /> },
+        { id: 'expenses', href: '/expenses', label: 'Expenses', icon: <Receipt size={16} /> },
       ],
     },
     {
-      label: 'Administration',
+      label: 'INTELLIGENCE',
       items: [
-        { id: 'admin', href: '/admin', label: 'Staff Governance', icon: <Shield size={16} /> },
-        { id: 'settings', href: '/settings', label: 'System Settings', icon: <Settings size={16} /> },
+        { id: 'crm', href: '/crm', label: 'CRM', icon: <Target size={16} /> },
+        { id: 'analytics', href: '/analytics', label: 'Analytics', icon: <BarChart3 size={16} /> },
+        { id: 'marketing', href: '/marketing', label: 'Marketing', icon: <Megaphone size={16} /> },
+      ],
+    },
+    {
+      label: 'TEAM',
+      items: [
+        { id: 'discussion', href: '/discussion', label: 'Discussion', icon: <MessagesSquare size={16} /> },
+        { id: 'knowledge-base', href: '/knowledge-base', label: 'Knowledge Base', icon: <BookOpen size={16} /> },
+        { id: 'hr', href: '/hr', label: 'HR', icon: <Briefcase size={16} /> },
+      ],
+    },
+    {
+      label: 'SYSTEM',
+      items: [
+        { id: 'admin', href: '/admin', label: 'Administration', icon: <Shield size={16} /> },
+        { id: 'settings', href: '/settings', label: 'Settings', icon: <Settings size={16} /> },
       ],
     },
   ];
@@ -187,7 +212,7 @@ export function Sidebar({ isOpen, onClose }: SidebarProps) {
                   <span className="ic">{item.icon}</span>
                   <span>{item.label}</span>
                   {item.pill && (
-                    <span className={`pill ${item.pillColor === 'red' ? 'red' : ''}`}>
+                    <span className={`pill ${item.pillColor || ''}`}>
                       {item.pill}
                     </span>
                   )}

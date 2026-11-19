@@ -152,3 +152,86 @@ export interface Message {
   ai_coaching_suggestion?: string;
   created_at: string;
 }
+
+export interface Expense {
+  id: string;
+  code?: string;
+  title: string;
+  category: 'logistics' | 'packaging' | 'marketing' | 'warehousing' | 'utilities' | string;
+  amount: number;
+  paid_via?: string;
+  warehouse_id?: string;
+  status: 'pending' | 'approved' | 'rejected' | string;
+  recorded_by?: string;
+  expense_date?: string;
+  notes?: string;
+  created_at?: string;
+}
+
+export interface MarketingCampaign {
+  id: string;
+  name: string;
+  channel: string;
+  audience_size: number;
+  delivery_rate: string;
+  click_rate: string;
+  orders_generated: number;
+  revenue: number;
+  status: 'active' | 'completed' | 'scheduled' | string;
+  created_at?: string;
+}
+
+export interface PromoCode {
+  id: string;
+  code: string;
+  discount_type: 'percentage' | 'fixed';
+  discount_value: number;
+  description?: string;
+  min_order_amount?: number;
+  usage_count: number;
+  is_active: boolean;
+  created_at?: string;
+}
+
+export interface DiscussionChannel {
+  id: string;
+  name: string;
+  description?: string;
+  created_at?: string;
+}
+
+export interface DiscussionMessage {
+  id: string;
+  channel_id: string;
+  author: string;
+  author_role: string;
+  avatar_color: string;
+  content: string;
+  is_pinned?: boolean;
+  created_at: string;
+}
+
+export interface KnowledgeArticle {
+  id: string;
+  title: string;
+  category: 'logistics' | 'finance' | 'sales' | 'policy' | string;
+  excerpt?: string;
+  content: string;
+  read_time?: string;
+  updated_at?: string;
+  created_at?: string;
+}
+
+export interface StaffMember {
+  id: string;
+  profile_id?: string;
+  name: string;
+  role: string;
+  department: 'Operations' | 'Sales' | 'Logistics' | 'Executive' | string;
+  hub: string;
+  phone: string;
+  status: 'Active' | 'On Delivery' | 'Offline' | string;
+  rating: number;
+  avatar_color: string;
+  created_at?: string;
+}
