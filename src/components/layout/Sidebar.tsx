@@ -55,8 +55,8 @@ export function Sidebar({ isOpen, onClose }: SidebarProps) {
   const pathname = usePathname();
   const { profile, signOut } = useAuth();
   const [isPasswordModalOpen, setIsPasswordModalOpen] = useState(false);
-  const [unreadCount, setUnreadCount] = useState<number>(24);
-  const [pendingOrdersCount, setPendingOrdersCount] = useState<number>(8);
+  const [unreadCount, setUnreadCount] = useState<number>(0);
+  const [pendingOrdersCount, setPendingOrdersCount] = useState<number>(0);
 
   const supabase = createClient();
 
@@ -64,15 +64,23 @@ export function Sidebar({ isOpen, onClose }: SidebarProps) {
     try {
       const [convRes, ordRes] = await Promise.all([
         supabase.from('conversations').select('unread_count'),
-        supabase.from('orders').select('id').eq('status', 'awaiting_dispatch'),
+        supabase.from('orders').select('id, status'),
       ]);
 
-      if (convRes.data && convRes.data.length > 0) {
+      if (convRes.data) {
         const totalUnread = convRes.data.reduce((sum, c) => sum + (Number(c.unread_count) || 0), 0);
-        setUnreadCount(totalUnread > 0 ? totalUnread : 24);
+        setUnreadCount(totalUnread);
+      } else {
+        setUnreadCount(0);
       }
-      if (ordRes.data && ordRes.data.length > 0) {
-        setPendingOrdersCount(ordRes.data.length);
+
+      if (ordRes.data) {
+        const pending = ordRes.data.filter(
+          (o) => o.status === 'awaiting_dispatch' || o.status === 'pending'
+        );
+        setPendingOrdersCount(pending.length);
+      } else {
+        setPendingOrdersCount(0);
       }
     } catch (err) {
       console.error('Error fetching live sidebar badge counts:', err);
@@ -108,7 +116,7 @@ export function Sidebar({ isOpen, onClose }: SidebarProps) {
           href: '/inbox',
           label: 'Inbox',
           icon: <MessageSquare size={16} />,
-          pill: String(unreadCount),
+          pill: unreadCount > 0 ? String(unreadCount) : undefined,
           pillColor: 'green',
         },
         { id: 'ai', href: '/ai', label: 'AI Assistant', icon: <Sparkles size={16} /> },
@@ -122,7 +130,7 @@ export function Sidebar({ isOpen, onClose }: SidebarProps) {
           href: '/orders',
           label: 'Orders',
           icon: <ShoppingBag size={16} />,
-          pill: String(pendingOrdersCount),
+          pill: pendingOrdersCount > 0 ? String(pendingOrdersCount) : undefined,
           pillColor: 'red',
         },
         { id: 'customers', href: '/customers', label: 'Customers', icon: <Users size={16} /> },

@@ -200,80 +200,103 @@ export function InboxView() {
           </div>
 
           <div className="wa-chats">
-            {filteredConversations.map((conv) => {
-              const cust = conv.customer as Customer;
-              const isSelected = conv.id === activeConvId;
+            {filteredConversations.length === 0 ? (
+              <div
+                style={{
+                  display: 'flex',
+                  flexDirection: 'column',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  padding: '48px 16px',
+                  textAlign: 'center',
+                  color: 'var(--t3)',
+                  gap: '8px',
+                }}
+              >
+                <MessageSquare size={28} style={{ opacity: 0.5, marginBottom: '4px' }} />
+                <span style={{ fontSize: '13px', fontWeight: 600, color: 'var(--t1)' }}>
+                  No conversations yet
+                </span>
+                <p style={{ margin: 0, fontSize: '11.5px', color: 'var(--t3)', lineHeight: 1.4 }}>
+                  Incoming messages from WhatsApp, Instagram, or TikTok will show up here automatically.
+                </p>
+              </div>
+            ) : (
+              filteredConversations.map((conv) => {
+                const cust = conv.customer as Customer;
+                const isSelected = conv.id === activeConvId;
 
-              return (
-                <div
-                  key={conv.id}
-                  className={`wa-chat ${isSelected ? 'on' : ''}`}
-                  onClick={() => {
-                    setActiveConvId(conv.id);
-                    setMobileView('chat');
-                  }}
-                >
-                  <div className="av a3">
-                    {cust?.full_name
-                      ?.split(' ')
-                      .map((n) => n[0])
-                      .join('')
-                      .toUpperCase() || 'CU'}
-                  </div>
-                  <div className="meta">
-                    <div className="r1">
-                      <b>{cust?.full_name || 'Customer'}</b>
-                      <span className={conv.unread_count > 0 ? 'new' : ''}>
-                        {new Date(conv.last_message_at).toLocaleTimeString([], {
-                          hour: '2-digit',
-                          minute: '2-digit',
-                        })}
-                      </span>
+                return (
+                  <div
+                    key={conv.id}
+                    className={`wa-chat ${isSelected ? 'on' : ''}`}
+                    onClick={() => {
+                      setActiveConvId(conv.id);
+                      setMobileView('chat');
+                    }}
+                  >
+                    <div className="av a3">
+                      {cust?.full_name
+                        ?.split(' ')
+                        .map((n) => n[0])
+                        .join('')
+                        .toUpperCase() || 'CU'}
                     </div>
-                    <div className="r2">
-                      <p>{conv.last_message || 'No messages yet'}</p>
-                      {conv.unread_count > 0 && <span className="ub">{conv.unread_count}</span>}
-                    </div>
-                    <div style={{ display: 'flex', gap: '5px', marginTop: '4px' }}>
-                      <span
-                        className={`wa-tag ${
-                          conv.channel === 'instagram'
-                            ? 'wt-ig'
-                            : conv.channel === 'facebook'
-                            ? 'wt-fb'
-                            : conv.channel === 'tiktok'
-                            ? 'wt-tt'
-                            : 'wt-wa'
-                        }`}
-                      >
-                        {conv.channel}
-                      </span>
-                      {conv.priority_flag && (
-                        <span
-                          className="wa-tag"
-                          style={{
-                            background:
-                              conv.priority_flag === 'ready_to_buy'
-                                ? 'rgba(34,197,94,.15)'
-                                : conv.priority_flag === 'at_risk'
-                                ? 'rgba(239,68,68,.18)'
-                                : 'rgba(244,180,0,.15)',
-                            color:
-                              conv.priority_flag === 'ready_to_buy'
-                                ? '#4ADE80'
-                                : conv.priority_flag === 'at_risk'
-                                ? '#FCA5A5'
-                                : '#FCD34D',
-                          }}
-                        >
-                          {conv.priority_flag.replace(/_/g, ' ')}
+                    <div className="meta">
+                      <div className="r1">
+                        <b>{cust?.full_name || 'Customer'}</b>
+                        <span className={conv.unread_count > 0 ? 'new' : ''}>
+                          {new Date(conv.last_message_at).toLocaleTimeString([], {
+                            hour: '2-digit',
+                            minute: '2-digit',
+                          })}
                         </span>
-                      )}
+                      </div>
+                      <div className="r2">
+                        <p>{conv.last_message || 'No messages yet'}</p>
+                        {conv.unread_count > 0 && <span className="ub">{conv.unread_count}</span>}
+                      </div>
+                      <div style={{ display: 'flex', gap: '5px', marginTop: '4px' }}>
+                        <span
+                          className={`wa-tag ${
+                            conv.channel === 'instagram'
+                              ? 'wt-ig'
+                              : conv.channel === 'facebook'
+                              ? 'wt-fb'
+                              : conv.channel === 'tiktok'
+                              ? 'wt-tt'
+                              : 'wt-wa'
+                          }`}
+                        >
+                          {conv.channel}
+                        </span>
+                        {conv.priority_flag && (
+                          <span
+                            className="wa-tag"
+                            style={{
+                              background:
+                                conv.priority_flag === 'ready_to_buy'
+                                  ? 'rgba(34,197,94,.15)'
+                                  : conv.priority_flag === 'at_risk'
+                                  ? 'rgba(239,68,68,.18)'
+                                  : 'rgba(244,180,0,.15)',
+                              color:
+                                conv.priority_flag === 'ready_to_buy'
+                                  ? '#4ADE80'
+                                  : conv.priority_flag === 'at_risk'
+                                  ? '#FCA5A5'
+                                  : '#FCD34D',
+                            }}
+                          >
+                            {conv.priority_flag.replace(/_/g, ' ')}
+                          </span>
+                        )}
+                      </div>
                     </div>
                   </div>
-                </div>
-              );
-            })}
+                );
+              })
+            )}
           </div>
         </div>
 
@@ -431,8 +454,39 @@ export function InboxView() {
               </div>
             </>
           ) : (
-            <div style={{ display: 'grid', placeItems: 'center', height: '100%', color: 'var(--t3)' }}>
-              Select a conversation to start chatting
+            <div
+              style={{
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'center',
+                justifyContent: 'center',
+                height: '100%',
+                color: 'var(--t3)',
+                gap: '12px',
+                padding: '24px',
+                textAlign: 'center',
+              }}
+            >
+              <div
+                style={{
+                  width: 56,
+                  height: 56,
+                  borderRadius: '50%',
+                  background: 'var(--bg-subtle)',
+                  display: 'grid',
+                  placeItems: 'center',
+                  color: 'var(--green)',
+                  border: '1px solid var(--border)',
+                }}
+              >
+                <MessageSquare size={26} />
+              </div>
+              <div style={{ fontSize: '15px', fontWeight: 600, color: 'var(--t1)' }}>
+                Select a conversation to start chatting
+              </div>
+              <p style={{ margin: 0, fontSize: '12.5px', color: 'var(--t3)', maxWidth: 340 }}>
+                Select an active chat from the left panel or wait for incoming messages across WhatsApp, Instagram, and TikTok.
+              </p>
             </div>
           )}
         </div>

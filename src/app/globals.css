@@ -296,7 +296,7 @@ input, select, textarea {
 
 .card.lift:hover {
   border-color: var(--card-border-hover);
-  background: #FFFFFF;
+  background: var(--card-hover);
   transform: translateY(-2px);
   box-shadow: var(--shadow-md);
 }
@@ -1030,7 +1030,7 @@ input:-webkit-autofill:active {
   overflow-x: auto;
   border: 1px solid var(--border);
   border-radius: var(--r-lg);
-  background: #FFFFFF;
+  background: var(--card);
   box-shadow: var(--shadow-sm);
 }
 
@@ -1149,7 +1149,7 @@ tbody tr:hover {
   border-radius: 8px;
   place-items: center;
   border: 1px solid var(--border);
-  background: #FFFFFF;
+  background: var(--card);
   color: var(--t2);
   cursor: pointer;
   flex-shrink: 0;
@@ -1175,13 +1175,13 @@ tbody tr:hover {
   border: 1px solid var(--border);
   border-radius: var(--r-lg);
   overflow: hidden;
-  background: #FFFFFF;
+  background: var(--card);
   box-shadow: var(--shadow-sm);
 }
 
 .wa-list {
   width: 320px;
-  background: #FFFFFF;
+  background: var(--card);
   border-right: 1px solid var(--border);
   display: flex;
   flex-direction: column;
@@ -1197,19 +1197,19 @@ tbody tr:hover {
   font-size: 13.5px;
   font-weight: 600;
   color: var(--t1);
-  background: #FAFAFA;
+  background: var(--bg-subtle);
 }
 
 .wa-search {
   padding: 10px 14px;
   border-bottom: 1px solid var(--border);
   position: relative;
-  background: #FAFAFA;
+  background: var(--bg-subtle);
 }
 
 .wa-search input {
   width: 100%;
-  background: #FFFFFF;
+  background: var(--card);
   border: 1px solid var(--border);
   border-radius: 999px;
   padding: 7px 14px 7px 30px;
@@ -1228,7 +1228,7 @@ tbody tr:hover {
   padding: 8px 12px;
   border-bottom: 1px solid var(--border);
   overflow-x: auto;
-  background: #FAFAFA;
+  background: var(--bg-subtle);
 }
 
 .wa-filters button {
@@ -1237,7 +1237,8 @@ tbody tr:hover {
   font-size: 11.5px;
   font-weight: 500;
   color: var(--t3);
-  background: var(--bg-subtle);
+  background: var(--card);
+  border: 1px solid var(--border);
   white-space: nowrap;
 }
 
@@ -1341,14 +1342,14 @@ tbody tr:hover {
   flex: 1;
   display: flex;
   flex-direction: column;
-  background: #F8FAFC;
+  background: var(--bg);
   min-width: 0;
 }
 
 .wa-conv-head {
   padding: 12px 18px;
   border-bottom: 1px solid var(--border);
-  background: #FFFFFF;
+  background: var(--card);
   display: flex;
   align-items: center;
   gap: 12px;
@@ -1378,7 +1379,7 @@ tbody tr:hover {
   display: grid;
   place-items: center;
   border: 1px solid var(--border);
-  background: #FFFFFF;
+  background: var(--card);
   color: var(--t2);
   cursor: pointer;
   font-size: 13px;
@@ -1424,7 +1425,7 @@ tbody tr:hover {
 
 .msg.in {
   align-self: flex-start;
-  background: #FFFFFF;
+  background: var(--card);
   color: var(--t1);
   border: 1px solid var(--border);
   border-bottom-left-radius: 3px;
@@ -1483,7 +1484,7 @@ tbody tr:hover {
 
 /* AI Sales Coach */
 .ai-coach {
-  background: #FFFFFF;
+  background: var(--card);
   border-top: 1px solid var(--border);
   padding: 10px 16px;
   box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.03);
@@ -1537,7 +1538,7 @@ tbody tr:hover {
 /* Message Input Bar */
 .wa-input {
   padding: 12px 18px;
-  background: #FFFFFF;
+  background: var(--card);
   border-top: 1px solid var(--border);
   display: flex;
   align-items: center;
@@ -1556,7 +1557,7 @@ tbody tr:hover {
 }
 
 .wa-input input:focus {
-  background: #FFFFFF;
+  background: var(--card);
   border-color: var(--blue);
   box-shadow: 0 0 0 3px var(--blue-glow);
 }
@@ -1565,24 +1566,27 @@ tbody tr:hover {
   width: 38px;
   height: 38px;
   border-radius: 50%;
-  background: var(--blue);
+  background: var(--green);
   color: #FFFFFF;
   display: grid;
   place-items: center;
   font-size: 14px;
   font-weight: bold;
-  box-shadow: 0 2px 6px rgba(37, 99, 235, 0.3);
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 2px 6px rgba(16, 185, 129, 0.3);
+  transition: all 0.15s ease;
 }
 
 .wa-send:hover {
-  background: var(--blue-hover);
+  background: var(--green-hover);
   transform: scale(1.04);
 }
 
 /* Right Customer 360 Sidebar */
 .wa-crm {
   width: 290px;
-  background: #FFFFFF;
+  background: var(--card);
   border-left: 1px solid var(--border);
   padding: 20px 16px;
   overflow-y: auto;
@@ -2087,30 +2091,102 @@ tbody tr:hover {
 }
 
 /* WhatsApp CRM Dark Mode */
-[data-theme='dark'] .wa-conv-list {
+[data-theme='dark'] .wa {
   background: #0B1017;
-  border-right-color: var(--border);
+  border-color: rgba(255, 255, 255, 0.08);
 }
 
-[data-theme='dark'] .wa-conv-item {
-  border-bottom-color: var(--border);
+[data-theme='dark'] .wa-list {
+  background: #0D1118;
+  border-right-color: rgba(255, 255, 255, 0.08);
 }
 
-[data-theme='dark'] .wa-conv-item:hover {
+[data-theme='dark'] .wa-list-head {
   background: #111822;
+  border-bottom-color: rgba(255, 255, 255, 0.08);
+  color: #F8FAFC;
 }
 
-[data-theme='dark'] .wa-conv-item.active {
-  background: #16202E;
+[data-theme='dark'] .wa-search {
+  background: #0D1118;
+  border-bottom-color: rgba(255, 255, 255, 0.08);
+  color: #64748B;
+}
+
+[data-theme='dark'] .wa-search input {
+  background: #131924;
+  border-color: rgba(255, 255, 255, 0.08);
+  color: #F8FAFC;
+}
+
+[data-theme='dark'] .wa-search input:focus {
+  background: #18202F;
+  border-color: #3B82F6;
+}
+
+[data-theme='dark'] .wa-filters {
+  background: #0D1118;
+  border-bottom-color: rgba(255, 255, 255, 0.08);
+}
+
+[data-theme='dark'] .wa-filters button {
+  background: #131924;
+  color: #94A3B8;
+  border-color: rgba(255, 255, 255, 0.08);
+}
+
+[data-theme='dark'] .wa-filters button:hover {
+  background: #1C2638;
+  color: #FFFFFF;
+}
+
+[data-theme='dark'] .wa-filters button.on {
+  background: #10B981;
+  color: #FFFFFF;
+  border-color: #10B981;
+}
+
+[data-theme='dark'] .wa-chats {
+  background: #0D1118;
 }
 
 [data-theme='dark'] .wa-chat {
+  background: #0D1118;
+  border-bottom-color: rgba(255, 255, 255, 0.04);
+}
+
+[data-theme='dark'] .wa-chat:hover {
+  background: #131924;
+}
+
+[data-theme='dark'] .wa-chat.on {
+  background: #16202E;
+  border-left: 3px solid #10B981;
+}
+
+[data-theme='dark'] .wa-chat .r1 b {
+  color: #F8FAFC;
+}
+
+[data-theme='dark'] .wa-chat .r1 span {
+  color: #64748B;
+}
+
+[data-theme='dark'] .wa-chat .r1 span.new {
+  color: #34D399;
+}
+
+[data-theme='dark'] .wa-chat .r2 p {
+  color: #94A3B8;
+}
+
+[data-theme='dark'] .wa-conv {
   background: #07090E;
 }
 
 [data-theme='dark'] .wa-conv-head {
   background: #0D1118;
-  border-bottom-color: var(--border);
+  border-bottom-color: rgba(255, 255, 255, 0.08);
 }
 
 [data-theme='dark'] .wa-conv-head .nm b {
@@ -2124,7 +2200,7 @@ tbody tr:hover {
 [data-theme='dark'] .wa-ic {
   background: #131924;
   color: var(--t2);
-  border-color: var(--border);
+  border-color: rgba(255, 255, 255, 0.08);
 }
 
 [data-theme='dark'] .wa-ic:hover {
@@ -2132,8 +2208,14 @@ tbody tr:hover {
   color: #FFFFFF;
 }
 
+[data-theme='dark'] .wa-day {
+  background: #131924;
+  border-color: rgba(255, 255, 255, 0.08);
+  color: #64748B;
+}
+
 [data-theme='dark'] .msg.in {
-  background: #1E293B;
+  background: #18202F;
   color: #FFFFFF;
   border-color: rgba(255, 255, 255, 0.08);
 }
@@ -2143,17 +2225,81 @@ tbody tr:hover {
   color: #FFFFFF;
 }
 
+[data-theme='dark'] .msg.ai-note {
+  background: rgba(139, 92, 246, 0.12);
+  border-color: rgba(139, 92, 246, 0.25);
+  color: #C4B5FD;
+}
+
 [data-theme='dark'] .ai-coach {
-  background: rgba(19, 25, 36, 0.95);
-  border-top: 1px solid rgba(139, 92, 246, 0.25);
+  background: #0D1118;
+  border-top-color: rgba(255, 255, 255, 0.08);
+}
+
+[data-theme='dark'] .ai-coach .hd {
+  color: #A78BFA;
+}
+
+[data-theme='dark'] .ai-coach .chip {
+  background: rgba(139, 92, 246, 0.12);
+  border-color: rgba(139, 92, 246, 0.25);
+  color: #C4B5FD;
+}
+
+[data-theme='dark'] .ai-coach .chip:hover {
+  background: rgba(139, 92, 246, 0.22);
+  border-color: #8B5CF6;
+  color: #FFFFFF;
 }
 
 [data-theme='dark'] .wa-input {
   background: #0D1118;
-  border-top-color: var(--border);
+  border-top-color: rgba(255, 255, 255, 0.08);
+}
+
+[data-theme='dark'] .wa-input input {
+  background: #131924;
+  border-color: rgba(255, 255, 255, 0.08);
+  color: #F8FAFC;
+}
+
+[data-theme='dark'] .wa-input input:focus {
+  background: #18202F;
+  border-color: #10B981;
+  box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.2);
 }
 
 [data-theme='dark'] .wa-crm {
   background: #0D1118;
-  border-left-color: var(--border);
+  border-left-color: rgba(255, 255, 255, 0.08);
 }
+
+[data-theme='dark'] .wa-crm .card-dark {
+  background: #131924;
+  border-color: rgba(255, 255, 255, 0.08);
+}
+
+[data-theme='dark'] .wa-crm .crm-row {
+  border-bottom-color: rgba(255, 255, 255, 0.06);
+}
+
+[data-theme='dark'] .wa-crm .crm-row span {
+  color: #94A3B8;
+}
+
+[data-theme='dark'] .wa-crm .crm-row b {
+  color: #F8FAFC;
+}
+
+[data-theme='dark'] .wa-back-btn {
+  background: #131924;
+  border-color: rgba(255, 255, 255, 0.08);
+  color: #F8FAFC;
+}
+
+/* Omnichannel Channel Tags in Dark Mode */
+[data-theme='dark'] .wt-wa { background: rgba(16, 185, 129, 0.15); color: #34D399; border-color: rgba(16, 185, 129, 0.3); }
+[data-theme='dark'] .wt-ig { background: rgba(219, 39, 119, 0.15); color: #F472B6; border-color: rgba(219, 39, 119, 0.3); }
+[data-theme='dark'] .wt-fb { background: rgba(37, 99, 235, 0.15); color: #60A5FA; border-color: rgba(37, 99, 235, 0.3); }
+[data-theme='dark'] .wt-tt { background: rgba(225, 29, 72, 0.15); color: #FB7185; border-color: rgba(225, 29, 72, 0.3); }
+[data-theme='dark'] .wt-ai { background: rgba(124, 58, 237, 0.15); color: #A78BFA; border-color: rgba(124, 58, 237, 0.3); }
